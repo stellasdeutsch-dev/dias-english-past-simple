@@ -514,7 +514,7 @@ html.no-tts .say{display:none}
 .hw h3{margin:12px 0 2px;font-size:16px}
 .hw p{margin:0;font-size:14px;color:var(--mute)}
 .hw .big{position:absolute;right:4px;bottom:-26px;font-size:110px;font-weight:300;color:rgba(30,136,255,.07);line-height:1}
-@media (min-width:900px){.how{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:900px){.how{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}
 .faq{display:grid;gap:10px}
 .faq details{background:#fff;border-radius:22px;box-shadow:var(--sh2);padding:4px 18px}
 .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 0;font-weight:600;font-size:16px}
@@ -1004,7 +1004,7 @@ html.js:not(.gs) .rv:not(.in){transform:translateY(24px)}
 <div class="toast" id="toast" role="status" aria-live="polite"><svg class="ic"><use href="#i-zap"/></svg><span></span></div>
 
 <script>
-var LINKS = { lava: '', wa: '' }; /* сюда вставить ссылку lava.top и WhatsApp Business */
+var LINKS = { lava: 'https://app.lava.top/products/2c950aa0-d8be-4317-8f39-0f9b4016f5da', wa: '' }; /* wa: ссылка WhatsApp Business; пока пусто, кнопки WhatsApp скрыты */
 function psInit(){
   document.documentElement.classList.add('js');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1018,6 +1018,7 @@ function psInit(){
   function whenVisible(el, on, off, th){ if(!el) return; if(!('IntersectionObserver' in window)){ on(); return; } new IntersectionObserver(function(es){ es.forEach(function(en){ en.isIntersecting ? on() : (off && off()); }); }, {threshold:th||.25}).observe(el); }
 
   /* ---------- links ---------- */
+  if(!LINKS.wa) $$('[data-needs="wa"], [data-link="wa"]').forEach(function(el){ el.remove(); });
   $$('[data-link]').forEach(function(a){
     var u = LINKS[a.dataset.link];
     if(u){ a.href = u; a.target = '_blank'; a.rel = 'noopener'; }
